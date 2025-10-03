@@ -1,0 +1,139 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  name          String?
+  password      String
+  walletBalance Decimal  @default(100000) // Starting balance of ₹1,00,000
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relations
+  orders        Order[]
+  portfolio     Portfolio[]
+  transactions  Transaction[]
+
+  @@map("users")
+}
+
+model Stock {
+  id          String   @id @default(cuid())
+  symbol      String   @unique
+  name        String
+  sector      String?
+  marketCap   Decimal?
+  description String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  stockPrices StockPrice[]
+  orders      Order[]
+  portfolio   Portfolio[]
+  transactions Transaction[]
+
+  @@map("stocks")
+}
+
+model StockPrice {
+  id        String   @id @default(cuid())
+  stockId   String
+  dateTime  DateTime
+  open      Decimal
+  high      Decimal
+  low       Decimal
+  close     Decimal
+  volume    BigInt   @default(0)
+  createdAt DateTime @default(now())
+
+  // Relations
+  stock Stock @relation(fields: [stockId], references: [id], onDelete: Cascade)
+
+  @@unique([stockId, dateTime])
+  @@map("stock_prices")
+}
+
+model Order {
+  id        String      @id @default(cuid())
+  userId    String
+  stockId   String
+  type      OrderType
+  quantity  Int
+  price     Decimal?
+  status    OrderStatus @default(PENDING)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+
+  // Relations
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  stock        Stock         @relation(fields: [stockId], references: [id], onDelete: Cascade)
+  transactions Transaction[]
+
+  @@map("orders")
+}
+
+model Portfolio {
+  id           String  @id @default(cuid())
+  userId       String
+  stockId      String
+  quantity     Int     @default(0)
+  avgPrice     Decimal @default(0)
+  currentValue Decimal @default(0)
+  totalInvested Decimal @default(0)
+  profitLoss   Decimal @default(0)
+  updatedAt    DateTime @updatedAt
+
+  // Relations
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  stock Stock @relation(fields: [stockId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, stockId])
+  @@map("portfolio")
+}
+
+model Transaction {
+  id        String            @id @default(cuid())
+  orderId   String
+  userId    String
+  stockId   String
+  action    TransactionAction
+  quantity  Int
+  price     Decimal
+  timestamp DateTime          @default(now())
+
+  // Relations
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  stock Stock @relation(fields: [stockId], references: [id], onDelete: Cascade)
+
+  @@map("transactions")
+}
+
+enum OrderType {
+  BUY
+  SELL
+}
+
+enum OrderStatus {
+  PENDING
+  EXECUTED
+  CANCELLED
+  PARTIALLY_EXECUTED
+}
+
+enum TransactionAction {
+  BUY
+  SELL
+}

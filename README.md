@@ -1,36 +1,192 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Virtual Stock Market Simulator
 
-## Getting Started
+A comprehensive full-stack Next.js application that simulates stock trading with virtual currency. Users can buy/sell stocks, track their portfolio, and compete on leaderboards.
 
-First, run the development server:
+## Features
 
+### Core Features
+- **User Management**: Registration, login, and authentication with NextAuth
+- **Virtual Wallet**: Starting balance of ₹1,00,000 for each user
+- **Stock Market Data**: Real-time or simulated stock price feeds
+- **Trading System**: Buy/sell stocks with order management
+- **Portfolio Management**: Track holdings, profit/loss, and portfolio value
+- **Analytics Dashboard**: Leaderboard and market overview
+
+### Advanced Features
+- **Concurrency Control**: Row-level locking to prevent double spending
+- **Real-time Updates**: Stock prices update automatically
+- **Transaction History**: Complete audit trail of all trades
+- **Portfolio Analytics**: Dynamic profit/loss calculations
+- **Market Screener**: Top gainers, losers, and most active stocks
+
+## Tech Stack
+
+- **Frontend**: Next.js 14, React, TypeScript, Tailwind CSS
+- **Backend**: Next.js API Routes, Prisma ORM
+- **Database**: PostgreSQL
+- **Authentication**: NextAuth.js
+- **UI Components**: Radix UI, Lucide React
+- **Charts**: Recharts
+
+## Database Schema
+
+### Tables
+- `users` - User accounts with wallet balance
+- `stocks` - Stock information (symbol, name, sector)
+- `stock_prices` - Historical price data (OHLCV)
+- `orders` - Trading orders (buy/sell)
+- `portfolio` - User holdings and P&L
+- `transactions` - Executed trades audit trail
+
+## Setup Instructions
+
+### Prerequisites
+- Node.js 18+ 
+- PostgreSQL database
+- npm or yarn
+
+### Installation
+
+1. **Clone and install dependencies**
+   ```bash
+   cd virtual-stock-market
+   npm install
+   ```
+
+2. **Set up environment variables**
+   Create `.env.local` file:
+   ```env
+   DATABASE_URL="postgresql://username:password@localhost:5432/virtual_stock_market?schema=public"
+   NEXTAUTH_URL="http://localhost:3000"
+   NEXTAUTH_SECRET="your-secret-key-here"
+   ```
+
+3. **Set up the database**
+   ```bash
+   # Generate Prisma client
+   npx prisma generate
+   
+   # Run database migrations
+   npx prisma migrate dev
+   
+   # Initialize with sample data
+   npm run dev
+   # Then visit: http://localhost:3000/api/init-db
+   ```
+
+4. **Start the development server**
+   ```bash
+   npm run dev
+   ```
+
+5. **Access the application**
+   - Open [http://localhost:3000](http://localhost:3000)
+   - Register a new account or sign in
+   - Start trading!
+
+## API Endpoints
+
+### Authentication
+- `POST /api/auth/register` - User registration
+- `POST /api/auth/[...nextauth]` - NextAuth endpoints
+
+### Stocks
+- `GET /api/stocks` - Get all stocks
+- `GET /api/stocks/[symbol]` - Get specific stock
+- `POST /api/stocks/update-prices` - Update stock prices
+
+### Trading
+- `POST /api/trade` - Execute trade
+- `GET /api/orders` - Get user orders
+- `GET /api/transactions` - Get transaction history
+
+### Portfolio
+- `GET /api/portfolio` - Get user portfolio
+- `GET /api/wallet` - Get wallet balance
+
+### Analytics
+- `GET /api/leaderboard` - Get leaderboard
+- `POST /api/init-db` - Initialize database
+
+## Key Features Explained
+
+### Concurrency Control
+The trading system uses database transactions with row-level locking to ensure:
+- No double spending
+- Consistent portfolio updates
+- Atomic trade execution
+
+### Stock Price Simulation
+- Random price movements based on volatility
+- Realistic market behavior
+- Historical price tracking
+
+### Portfolio Management
+- Automatic P&L calculations
+- Average cost tracking
+- Real-time portfolio valuation
+
+### Security
+- Password hashing with bcrypt
+- Session-based authentication
+- Input validation and sanitization
+
+## Development
+
+### Database Management
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# View database in Prisma Studio
+npx prisma studio
+
+# Reset database
+npx prisma migrate reset
+
+# Deploy migrations
+npx prisma migrate deploy
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Adding New Features
+1. Update Prisma schema if needed
+2. Run migrations: `npx prisma migrate dev`
+3. Update API routes
+4. Add UI components
+5. Test thoroughly
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Production Deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Environment Setup**
+   - Set production database URL
+   - Configure NextAuth secrets
+   - Set up proper CORS
 
-## Learn More
+2. **Database**
+   - Use managed PostgreSQL (AWS RDS, Supabase, etc.)
+   - Run migrations: `npx prisma migrate deploy`
 
-To learn more about Next.js, take a look at the following resources:
+3. **Deployment**
+   - Deploy to Vercel, Netlify, or your preferred platform
+   - Configure environment variables
+   - Set up monitoring and logging
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contributing
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+MIT License - see LICENSE file for details
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Support
+
+For issues and questions:
+1. Check the documentation
+2. Search existing issues
+3. Create a new issue with detailed description
+
+---
+
+**Happy Trading! 📈**
