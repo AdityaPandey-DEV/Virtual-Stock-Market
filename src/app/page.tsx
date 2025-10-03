@@ -27,7 +27,7 @@ export default function Home() {
       {/* Navigation */}
       <nav className="relative z-10 bg-black/20 backdrop-blur-md border-b border-white/10">
         <div className="container mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center max-w-7xl mx-auto">
             <div className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
                 <TrendingUp className="w-5 h-5 text-white" />
@@ -53,8 +53,8 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <div className="relative z-10 container mx-auto px-4 py-20">
-        <div className="text-center max-w-4xl mx-auto">
+      <div className="relative z-10 hero-section">
+        <div className="text-center-all max-w-4xl mx-auto">
           <div className="inline-flex items-center px-6 py-3 bg-blue-500/10 border border-blue-500/30 rounded-full text-blue-400 text-sm font-medium mb-8 backdrop-blur-sm animate-fade-in">
             <span className="w-2 h-2 bg-green-400 rounded-full mr-3 animate-pulse"></span>
             <Zap className="w-4 h-4 mr-2" />
@@ -73,7 +73,7 @@ export default function Home() {
             and build your investment strategy risk-free.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up">
+          <div className="btn-center animate-fade-in-up">
             <Link
               href="/auth/signup"
               className="group btn-primary text-white px-8 py-4 rounded-lg text-lg font-semibold inline-flex items-center hover:scale-105 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/25"
@@ -93,7 +93,7 @@ export default function Home() {
 
       {/* Stats Section */}
       <div className="relative z-10 container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="stats-grid">
           <div className="text-center group hover:scale-105 transition-all duration-300 p-6 rounded-xl hover:bg-white/5">
             <div className="text-4xl font-bold text-blue-400 mb-2 group-hover:text-blue-300 transition-colors">₹1,00,000</div>
             <div className="text-gray-400 group-hover:text-gray-300 transition-colors">Starting Balance</div>
@@ -120,8 +120,8 @@ export default function Home() {
           <p className="text-gray-400 text-lg">Everything you need to become a successful trader</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="group trading-card glass rounded-xl p-8 hover:scale-105 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/10">
+        <div className="features-grid">
+          <div className="group trading-card glass rounded-xl p-8 hover:scale-105 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/10 grid-item">
             <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
               <BarChart3 className="w-6 h-6 text-white" />
             </div>
@@ -136,7 +136,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="group trading-card glass rounded-xl p-8 hover:scale-105 transition-all duration-300 hover:shadow-2xl hover:shadow-green-500/10">
+          <div className="group trading-card glass rounded-xl p-8 hover:scale-105 transition-all duration-300 hover:shadow-2xl hover:shadow-green-500/10 grid-item">
             <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-green-600 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
               <Shield className="w-6 h-6 text-white" />
             </div>
@@ -151,7 +151,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="group trading-card glass rounded-xl p-8 hover:scale-105 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/10">
+          <div className="group trading-card glass rounded-xl p-8 hover:scale-105 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/10 grid-item">
             <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-purple-600 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
               <Users className="w-6 h-6 text-white" />
             </div>
@@ -179,14 +179,14 @@ export default function Home() {
             </div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="market-grid">
             {[
               { symbol: 'RELIANCE', name: 'Reliance Industries', price: '₹2,450', change: '+2.5%', positive: true },
               { symbol: 'TCS', name: 'Tata Consultancy', price: '₹3,520', change: '+1.8%', positive: true },
               { symbol: 'HDFCBANK', name: 'HDFC Bank', price: '₹1,480', change: '-0.5%', positive: false },
               { symbol: 'INFY', name: 'Infosys Ltd', price: '₹1,750', change: '+3.2%', positive: true },
             ].map((stock, index) => (
-              <div key={index} className="trading-card bg-slate-800/50 rounded-lg p-6 border border-slate-700">
+              <div key={index} className="market-card grid-item">
                 <div className="flex justify-between items-start mb-4">
                   <div>
                     <div className="text-lg font-semibold text-white">{stock.symbol}</div>
@@ -211,7 +211,7 @@ export default function Home() {
             Join thousands of traders who are already mastering the markets with TradeVault. 
             Start your journey to financial success today.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="btn-center">
             <Link
               href="/auth/signup"
               className="btn-primary text-white px-8 py-4 rounded-lg text-lg font-semibold inline-flex items-center"
