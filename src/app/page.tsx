@@ -3,10 +3,25 @@ import { TrendingUp, Shield, BarChart3, Users, Zap } from 'lucide-react'
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.1%22%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2230%22%20r%3D%222%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
+      {/* Enhanced Background with Multiple Layers */}
+      <div className="absolute inset-0">
+        {/* Primary gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-slate-800/40 to-slate-900/60"></div>
+        
+        {/* Animated grid pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%220%200%2040%2040%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.1%22%3E%3Cpath%20d%3D%22M0%200h40v40H0z%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] animate-pulse"></div>
+        </div>
+        
+        {/* Floating geometric shapes */}
+        <div className="absolute top-20 left-10 w-32 h-32 bg-blue-500/10 rounded-full blur-xl animate-bounce"></div>
+        <div className="absolute top-40 right-20 w-24 h-24 bg-purple-500/10 rounded-full blur-lg animate-pulse"></div>
+        <div className="absolute bottom-20 left-1/4 w-40 h-40 bg-cyan-500/5 rounded-full blur-2xl animate-pulse"></div>
+        
+        {/* Subtle chart-like lines */}
+        <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent"></div>
+        <div className="absolute top-1/2 right-0 w-px h-32 bg-gradient-to-b from-transparent via-blue-500/20 to-transparent"></div>
       </div>
 
       {/* Navigation */}
@@ -40,36 +55,37 @@ export default function Home() {
       {/* Hero Section */}
       <div className="relative z-10 container mx-auto px-4 py-20">
         <div className="text-center max-w-4xl mx-auto">
-          <div className="inline-flex items-center px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-400 text-sm font-medium mb-8">
+          <div className="inline-flex items-center px-6 py-3 bg-blue-500/10 border border-blue-500/30 rounded-full text-blue-400 text-sm font-medium mb-8 backdrop-blur-sm animate-fade-in">
+            <span className="w-2 h-2 bg-green-400 rounded-full mr-3 animate-pulse"></span>
             <Zap className="w-4 h-4 mr-2" />
             Live Market Data • Real-time Trading
           </div>
           
-          <h1 className="text-6xl md:text-7xl font-bold mb-6">
-            <span className="gradient-text">Virtual Stock</span>
+          <h1 className="text-6xl md:text-7xl font-bold mb-6 animate-slide-up">
+            <span className="gradient-text animate-gradient">Virtual Stock</span>
             <br />
             <span className="text-white">Market Simulator</span>
           </h1>
           
-          <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed animate-fade-in-up">
             Master the art of trading with our advanced virtual platform. 
             Practice with real market data, compete with traders worldwide, 
             and build your investment strategy risk-free.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up">
             <Link
               href="/auth/signup"
-              className="btn-primary text-white px-8 py-4 rounded-lg text-lg font-semibold inline-flex items-center"
+              className="group btn-primary text-white px-8 py-4 rounded-lg text-lg font-semibold inline-flex items-center hover:scale-105 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/25"
             >
-              <TrendingUp className="w-5 h-5 mr-2" />
+              <TrendingUp className="w-5 h-5 mr-2 group-hover:translate-x-1 transition-transform" />
               Start Trading Now
             </Link>
             <Link
               href="/auth/signin"
-              className="px-8 py-4 border border-white/20 rounded-lg text-white hover:bg-white/5 transition-colors text-lg font-semibold"
+              className="group px-8 py-4 border border-white/20 rounded-lg text-white hover:bg-white/5 transition-all duration-300 text-lg font-semibold hover:scale-105 hover:shadow-xl hover:shadow-white/10"
             >
-              Sign In
+              <span className="group-hover:translate-x-1 transition-transform">Sign In</span>
             </Link>
           </div>
         </div>
@@ -78,21 +94,21 @@ export default function Home() {
       {/* Stats Section */}
       <div className="relative z-10 container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="text-center">
-            <div className="text-4xl font-bold text-blue-400 mb-2">₹1,00,000</div>
-            <div className="text-gray-400">Starting Balance</div>
+          <div className="text-center group hover:scale-105 transition-all duration-300 p-6 rounded-xl hover:bg-white/5">
+            <div className="text-4xl font-bold text-blue-400 mb-2 group-hover:text-blue-300 transition-colors">₹1,00,000</div>
+            <div className="text-gray-400 group-hover:text-gray-300 transition-colors">Starting Balance</div>
           </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-green-400 mb-2">10+</div>
-            <div className="text-gray-400">Live Stocks</div>
+          <div className="text-center group hover:scale-105 transition-all duration-300 p-6 rounded-xl hover:bg-white/5">
+            <div className="text-4xl font-bold text-green-400 mb-2 group-hover:text-green-300 transition-colors">10+</div>
+            <div className="text-gray-400 group-hover:text-gray-300 transition-colors">Live Stocks</div>
           </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-purple-400 mb-2">24/7</div>
-            <div className="text-gray-400">Market Access</div>
+          <div className="text-center group hover:scale-105 transition-all duration-300 p-6 rounded-xl hover:bg-white/5">
+            <div className="text-4xl font-bold text-purple-400 mb-2 group-hover:text-purple-300 transition-colors">24/7</div>
+            <div className="text-gray-400 group-hover:text-gray-300 transition-colors">Market Access</div>
           </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-orange-400 mb-2">0%</div>
-            <div className="text-gray-400">Risk</div>
+          <div className="text-center group hover:scale-105 transition-all duration-300 p-6 rounded-xl hover:bg-white/5">
+            <div className="text-4xl font-bold text-orange-400 mb-2 group-hover:text-orange-300 transition-colors">0%</div>
+            <div className="text-gray-400 group-hover:text-gray-300 transition-colors">Risk</div>
           </div>
         </div>
       </div>
@@ -105,47 +121,47 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="trading-card glass rounded-xl p-8">
-            <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mb-6">
+          <div className="group trading-card glass rounded-xl p-8 hover:scale-105 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/10">
+            <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
               <BarChart3 className="w-6 h-6 text-white" />
             </div>
-            <h3 className="text-xl font-semibold text-white mb-4">Real-time Trading</h3>
-            <p className="text-gray-400 mb-6">
+            <h3 className="text-xl font-semibold text-white mb-4 group-hover:text-blue-300 transition-colors">Real-time Trading</h3>
+            <p className="text-gray-400 mb-6 group-hover:text-gray-300 transition-colors">
               Experience live market conditions with real-time price updates, 
               order execution, and portfolio tracking.
             </p>
-            <div className="flex items-center text-blue-400 text-sm font-medium">
-              <div className="w-2 h-2 bg-blue-400 rounded-full mr-2 status-online"></div>
+            <div className="flex items-center text-blue-400 text-sm font-medium group-hover:text-blue-300 transition-colors">
+              <div className="w-2 h-2 bg-blue-400 rounded-full mr-2 status-online animate-pulse"></div>
               Live Market Data
             </div>
           </div>
 
-          <div className="trading-card glass rounded-xl p-8">
-            <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-green-600 rounded-lg flex items-center justify-center mb-6">
+          <div className="group trading-card glass rounded-xl p-8 hover:scale-105 transition-all duration-300 hover:shadow-2xl hover:shadow-green-500/10">
+            <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-green-600 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
               <Shield className="w-6 h-6 text-white" />
             </div>
-            <h3 className="text-xl font-semibold text-white mb-4">Risk-Free Learning</h3>
-            <p className="text-gray-400 mb-6">
+            <h3 className="text-xl font-semibold text-white mb-4 group-hover:text-green-300 transition-colors">Risk-Free Learning</h3>
+            <p className="text-gray-400 mb-6 group-hover:text-gray-300 transition-colors">
               Practice with virtual currency and learn trading strategies 
               without any financial risk to your real money.
             </p>
-            <div className="flex items-center text-green-400 text-sm font-medium">
-              <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
+            <div className="flex items-center text-green-400 text-sm font-medium group-hover:text-green-300 transition-colors">
+              <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
               100% Safe Trading
             </div>
           </div>
 
-          <div className="trading-card glass rounded-xl p-8">
-            <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-purple-600 rounded-lg flex items-center justify-center mb-6">
+          <div className="group trading-card glass rounded-xl p-8 hover:scale-105 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/10">
+            <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-purple-600 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
               <Users className="w-6 h-6 text-white" />
             </div>
-            <h3 className="text-xl font-semibold text-white mb-4">Global Competition</h3>
-            <p className="text-gray-400 mb-6">
+            <h3 className="text-xl font-semibold text-white mb-4 group-hover:text-purple-300 transition-colors">Global Competition</h3>
+            <p className="text-gray-400 mb-6 group-hover:text-gray-300 transition-colors">
               Compete with traders worldwide on our leaderboard and 
               learn from the best trading strategies.
             </p>
-            <div className="flex items-center text-purple-400 text-sm font-medium">
-              <div className="w-2 h-2 bg-purple-400 rounded-full mr-2"></div>
+            <div className="flex items-center text-purple-400 text-sm font-medium group-hover:text-purple-300 transition-colors">
+              <div className="w-2 h-2 bg-purple-400 rounded-full mr-2 animate-pulse"></div>
               Global Leaderboard
             </div>
           </div>
